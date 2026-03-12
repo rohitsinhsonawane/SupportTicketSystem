@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SupportTicketSystem.Api/SupportTicketSystem.Api.csproj" />
+  <Project Path="SupportTicketSystem.Desktop/SupportTicketSystem.Desktop.csproj" />
+</Solution>
