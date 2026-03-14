@@ -13,5 +13,7 @@
         public int UpdatedByUserId { get; set; }
 
         public DateTime UpdatedAt { get; set; }
+
+        public Ticket Ticket { get; set; }
     }
 }
