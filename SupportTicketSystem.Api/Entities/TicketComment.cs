@@ -8,7 +8,8 @@
 
         public string Comment { get; set; }
 
-        public int CreatedByUserId { get; set; }
+        public int CreatedByUserId { get; set; } = 0;
+        public User CreatedByUser { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

@@ -11,6 +11,7 @@
         public string NewStatus { get; set; }
 
         public int UpdatedByUserId { get; set; }
+        public User UpdatedByUser { get; set; }
 
         public DateTime UpdatedAt { get; set; }
 
