@@ -1,5 +1,3 @@
-using System;
-
 namespace SupportTicketSystem.Desktop.DTOs
 {
     public class LoginRequestDto

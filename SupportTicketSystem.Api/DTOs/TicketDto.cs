@@ -1,4 +1,4 @@
-﻿namespace SupportTicketSystem.Api.Entities
+﻿namespace SupportTicketSystem.Api.DTOs
 {
     public class TicketDto
     {
