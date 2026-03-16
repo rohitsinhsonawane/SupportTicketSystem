@@ -20,20 +20,24 @@ public class DashboardService : IDashboardService
 
     public async Task<DashboardResponseDto> GetDashboardData()
     {
-        var tickets = await _context.Tickets
-            .Include(t => t.AssignedAdmin)
-            .OrderByDescending(t => t.CreatedAt)
-            .ToListAsync();
+        // Use targeted queries instead of loading all tickets into memory
+        var totalTickets = await _context.Tickets.CountAsync();
+        var openTickets = await _context.Tickets.CountAsync(t => t.Status == "Open");
+        var inProgressTickets = await _context.Tickets.CountAsync(t => t.Status == "InProgress");
+        var closedTickets = await _context.Tickets.CountAsync(t => t.Status == "Closed");
 
         var summary = new DashboardSummaryDto
         {
-            TotalTickets = tickets.Count,
-            OpenTickets = tickets.Count(t => t.Status == "Open"),
-            InProgressTickets = tickets.Count(t => t.Status == "InProgress"),
-            ClosedTickets = tickets.Count(t => t.Status == "Closed")
+            TotalTickets = totalTickets,
+            OpenTickets = openTickets,
+            InProgressTickets = inProgressTickets,
+            ClosedTickets = closedTickets
         };
 
-        var recentTickets = tickets
+        var recentTickets = await _context.Tickets
+            .AsNoTracking()
+            .Include(t => t.AssignedAdmin)
+            .OrderByDescending(t => t.CreatedAt)
             .Take(5)
             .Select(t => new DashboardTicketDto
             {
@@ -43,18 +47,19 @@ public class DashboardService : IDashboardService
                 Priority = t.Priority,
                 Status = t.Status,
                 CreatedAt = t.CreatedAt,
-                AssignedAdminUsername = t.AssignedAdmin?.Username
+                AssignedAdminUsername = t.AssignedAdmin != null ? t.AssignedAdmin.Username : null
             })
-            .ToList();
+            .ToListAsync();
 
-        var statusDistribution = tickets
+        var statusDistribution = await _context.Tickets
+            .AsNoTracking()
             .GroupBy(t => t.Status)
             .Select(g => new DashboardStatusDistributionDto
             {
                 Status = g.Key,
                 Count = g.Count()
             })
-            .ToList();
+            .ToListAsync();
 
         return new DashboardResponseDto
         {
