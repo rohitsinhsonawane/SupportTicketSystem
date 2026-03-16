@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SupportTicketSystem.Api.Data;
+using SupportTicketSystem.Api.Middleware;
 using SupportTicketSystem.Api.Seed;
 using SupportTicketSystem.Api.Services;
 using SupportTicketSystem.Api.Services.Interface;
@@ -8,7 +9,7 @@ using AppDbContext = SupportTicketSystem.Api.Data.AppDbContext;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
+builder.Services.AddResponseCompression();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -35,6 +36,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseResponseCompression();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthorization();
 
