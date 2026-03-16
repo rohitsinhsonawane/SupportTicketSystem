@@ -42,6 +42,7 @@ namespace SupportTicketSystem.Api.Services
         public async Task<List<TicketDto>> GetTickets(int userId, string role)
         {
             IQueryable<Ticket> query = _context.Tickets
+                .AsNoTracking()
                 .Include(t => t.CreatedByUser)
                 .Include(t => t.AssignedAdmin);
 
@@ -58,6 +59,7 @@ namespace SupportTicketSystem.Api.Services
         public async Task<TicketDto?> GetTicketDetails(int ticketId)
         {
             var ticket = await _context.Tickets
+                .AsNoTracking()
                 .Include(t => t.CreatedByUser)
                 .Include(t => t.AssignedAdmin)
                 .Include(t => t.Comments)
@@ -109,6 +111,18 @@ namespace SupportTicketSystem.Api.Services
             _context.TicketStatusHistories.Add(history);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<TicketCommentDto>> GetTicketComments(int ticketId)
+        {
+            var comments = await _context.TicketComments
+                .AsNoTracking()
+                .Where(c => c.TicketId == ticketId)
+                .Include(c => c.CreatedByUser)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+
+            return _mapper.Map<List<TicketCommentDto>>(comments);
         }
 
         public async Task AddComment(int ticketId, string comment, int userId, bool internalComment)

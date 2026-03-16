@@ -96,6 +96,29 @@ namespace SupportTicketSystem.Api.Controllers
             }
         }
 
+        [HttpGet("{id}/comments")]
+        public async Task<IActionResult> GetComments(int id)
+        {
+            try
+            {
+                var comments = await _ticketService.GetTicketComments(id);
+
+                return Ok(new ApiResponse<object>(
+                    true,
+                    "Comments retrieved successfully",
+                    comments
+                ));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<object>(
+                    false,
+                    $"Error retrieving comments: {ex.Message}",
+                    null
+                ));
+            }
+        }
+
         [HttpPut("{id}/assign")]
         public async Task<IActionResult> Assign(int id, AssignTicketDto dto)
         {
