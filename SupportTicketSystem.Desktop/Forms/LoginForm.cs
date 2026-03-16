@@ -48,9 +48,9 @@ namespace SupportTicketSystem.Desktop.Forms
                     var userId = response.Data.UserId;
                     var role = response.Data.Role;
 
-                    // Open DashboardForm and pass user info
-                    DashboardForm dashboard = new DashboardForm(userId, role);
-                    dashboard.Show();
+                    // Open TicketsListForm and pass user info
+                    TicketsListForm ticketsList = new TicketsListForm(userId, role);
+                    ticketsList.Show();
 
                     // Hide login form
                     this.Hide();
