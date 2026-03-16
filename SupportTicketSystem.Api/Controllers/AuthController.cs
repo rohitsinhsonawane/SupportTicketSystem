@@ -45,5 +45,15 @@ namespace SupportTicketSystem.Api.Controllers
                 ));
             }
         }
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            return Ok(new ApiResponse<object>(
+                true,
+                "Logout successful",
+                null
+            ));
+        }
     }
 }

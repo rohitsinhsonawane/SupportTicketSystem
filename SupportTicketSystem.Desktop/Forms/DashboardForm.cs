@@ -1,4 +1,5 @@
 ﻿using SupportTicketSystem.Desktop.DTOs;
+using SupportTicketSystem.Desktop.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -140,6 +141,30 @@ namespace SupportTicketSystem.Desktop.Forms
             if (dataGridViewRecentTickets.Columns.Contains("CreatedByUserId"))
             {
                 dataGridViewRecentTickets.Columns["CreatedByUserId"].Visible = false;
+            }
+        }
+
+        private async void BtnLogout_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result != DialogResult.Yes)
+                    return;
+
+                await _apiClient.LogoutAsync();
+                TokenManager.ClearToken();
+
+                MessageBox.Show("Logged out successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Close this form and open login form
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

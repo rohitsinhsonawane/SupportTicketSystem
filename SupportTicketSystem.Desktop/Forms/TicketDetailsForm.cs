@@ -1,4 +1,5 @@
 using SupportTicketSystem.Desktop.DTOs;
+using SupportTicketSystem.Desktop.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -180,6 +181,30 @@ namespace SupportTicketSystem.Desktop.Forms
                 btnAddComment.Enabled = true;
                 txtComment.Enabled = true;
                 btnAddComment.Text = "Add Comment";
+            }
+        }
+
+        private async void BtnLogout_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result != DialogResult.Yes)
+                    return;
+
+                await _apiClient.LogoutAsync();
+                TokenManager.ClearToken();
+
+                MessageBox.Show("Logged out successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Close this form and open login form
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
