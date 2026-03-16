@@ -1,4 +1,5 @@
 using SupportTicketSystem.Desktop.DTOs;
+using SupportTicketSystem.Desktop.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -114,8 +115,11 @@ namespace SupportTicketSystem.Desktop.Forms
 
         private void BtnCreateTicket_Click(object sender, EventArgs e)
         {
-            // TODO: Implement create ticket functionality
-            MessageBox.Show("Create Ticket functionality will be implemented.", "Info");
+            CreateTicketForm createForm = new CreateTicketForm();
+            createForm.ShowDialog();
+
+            // Refresh the tickets list after closing the create form
+            _ = LoadTicketsAsync();
         }
 
         private void DataGridViewTickets_DoubleClick(object sender, EventArgs e)
@@ -127,7 +131,7 @@ namespace SupportTicketSystem.Desktop.Forms
 
                 // Get the selected row
                 var selectedRow = dataGridViewTickets.SelectedRows[0];
-                
+
                 // Extract ticket ID from the row
                 if (selectedRow.DataBoundItem is TicketListDto ticket)
                 {
@@ -139,6 +143,30 @@ namespace SupportTicketSystem.Desktop.Forms
             catch (Exception ex)
             {
                 MessageBox.Show($"Error opening ticket details: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void BtnLogout_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result != DialogResult.Yes)
+                    return;
+
+                await _apiClient.LogoutAsync();
+                TokenManager.ClearToken();
+
+                MessageBox.Show("Logged out successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Close this form and open login form
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
