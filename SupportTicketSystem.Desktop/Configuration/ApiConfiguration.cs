@@ -41,9 +41,13 @@ namespace SupportTicketSystem.Desktop.Configuration
 
         public string LoginEndpoint => _configuration["ApiSettings:Endpoints:Login"];
 
+        public string LogoutEndpoint => _configuration["ApiSettings:Endpoints:Logout"];
+
         public string DashboardEndpoint => _configuration["ApiSettings:Endpoints:Dashboard"];
 
         public string GetTicketsEndpoint => _configuration["ApiSettings:Endpoints:GetTickets"];
+
+        public string CreateTicketEndpoint => _configuration["ApiSettings:Endpoints:CreateTicket"];
 
         public string GetTicketDetailsEndpoint => _configuration["ApiSettings:Endpoints:GetTicketDetails"];
 
