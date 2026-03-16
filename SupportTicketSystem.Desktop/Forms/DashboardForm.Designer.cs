@@ -30,6 +30,7 @@
 
         private System.Windows.Forms.Panel panelSummaryContainer;
         private System.Windows.Forms.Panel panelTicketsContainer;
+        private System.Windows.Forms.Button btnLogout;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -69,6 +70,7 @@
             dataGridViewRecentTickets = new DataGridView();
             panelSummaryContainer = new Panel();
             panelTicketsContainer = new Panel();
+            btnLogout = new Button();
             tableLayoutPanelSummary.SuspendLayout();
             panelTotalTickets.SuspendLayout();
             panelOpenTickets.SuspendLayout();
@@ -256,6 +258,7 @@
             // panelSummaryContainer
             // 
             panelSummaryContainer.BackColor = Color.LightGray;
+            panelSummaryContainer.Controls.Add(btnLogout);
             panelSummaryContainer.Controls.Add(tableLayoutPanelSummary);
             panelSummaryContainer.Dock = DockStyle.Top;
             panelSummaryContainer.Location = new Point(0, 0);
@@ -263,6 +266,16 @@
             panelSummaryContainer.Padding = new Padding(10);
             panelSummaryContainer.Size = new Size(982, 150);
             panelSummaryContainer.TabIndex = 1;
+
+            // btnLogout
+            btnLogout.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnLogout.Location = new Point(860, 10);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(120, 40);
+            btnLogout.TabIndex = 2;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += BtnLogout_Click;
             // 
             // panelTicketsContainer
             // 

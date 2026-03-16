@@ -7,6 +7,8 @@ namespace SupportTicketSystem.Desktop.Forms
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        private System.Windows.Forms.Panel panelTopBar;
+        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Panel panelTicketDetails;
         private System.Windows.Forms.Label lblTicketNumberValue;
         private System.Windows.Forms.Label lblSubjectValue;
@@ -51,6 +53,8 @@ namespace SupportTicketSystem.Desktop.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            panelTopBar = new System.Windows.Forms.Panel();
+            btnLogout = new System.Windows.Forms.Button();
             panelTicketDetails = new System.Windows.Forms.Panel();
             lblTicketNumber = new System.Windows.Forms.Label();
             lblTicketNumberValue = new System.Windows.Forms.Label();
@@ -74,19 +78,40 @@ namespace SupportTicketSystem.Desktop.Forms
             btnAddComment = new System.Windows.Forms.Button();
 
             ((System.ComponentModel.ISupportInitialize)dataGridViewComments).BeginInit();
+            panelTopBar.SuspendLayout();
             panelTicketDetails.SuspendLayout();
             panelCommentSection.SuspendLayout();
             SuspendLayout();
+
+            // panelTopBar
+            panelTopBar.BackColor = System.Drawing.Color.LightGray;
+            panelTopBar.Controls.Add(btnLogout);
+            panelTopBar.Dock = System.Windows.Forms.DockStyle.Top;
+            panelTopBar.Location = new System.Drawing.Point(0, 0);
+            panelTopBar.Name = "panelTopBar";
+            panelTopBar.Padding = new System.Windows.Forms.Padding(10);
+            panelTopBar.Size = new System.Drawing.Size(1000, 60);
+            panelTopBar.TabIndex = 0;
+
+            // btnLogout
+            btnLogout.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            btnLogout.Location = new System.Drawing.Point(860, 10);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new System.Drawing.Size(120, 40);
+            btnLogout.TabIndex = 0;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += BtnLogout_Click;
 
             // panelTicketDetails
             panelTicketDetails.BackColor = System.Drawing.Color.White;
             panelTicketDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panelTicketDetails.Dock = System.Windows.Forms.DockStyle.Top;
             panelTicketDetails.Padding = new System.Windows.Forms.Padding(15);
-            panelTicketDetails.Location = new System.Drawing.Point(0, 0);
+            panelTicketDetails.Location = new System.Drawing.Point(0, 60);
             panelTicketDetails.Name = "panelTicketDetails";
-            panelTicketDetails.Size = new System.Drawing.Size(1000, 280);
-            panelTicketDetails.TabIndex = 0;
+            panelTicketDetails.Size = new System.Drawing.Size(1000, 220);
+            panelTicketDetails.TabIndex = 1;
 
             // lblTicketNumber
             lblTicketNumber.AutoSize = true;
@@ -209,6 +234,16 @@ namespace SupportTicketSystem.Desktop.Forms
             panelTicketDetails.Controls.Add(lblAssignedAdmin);
             panelTicketDetails.Controls.Add(lblAssignedAdminValue);
 
+            // btnLogout
+            btnLogout.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            btnLogout.Location = new System.Drawing.Point(850, 230);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new System.Drawing.Size(120, 40);
+            btnLogout.TabIndex = 2;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += BtnLogout_Click;
+
             // lblComments
             lblComments.AutoSize = true;
             lblComments.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
@@ -262,8 +297,8 @@ namespace SupportTicketSystem.Desktop.Forms
             panelCommentSection.Location = new System.Drawing.Point(0, 280);
             panelCommentSection.Name = "panelCommentSection";
             panelCommentSection.Padding = new System.Windows.Forms.Padding(10);
-            panelCommentSection.Size = new System.Drawing.Size(1000, 280);
-            panelCommentSection.TabIndex = 1;
+            panelCommentSection.Size = new System.Drawing.Size(1000, 260);
+            panelCommentSection.TabIndex = 2;
 
             // Panel for comment input
             var panelCommentInput = new System.Windows.Forms.Panel();
@@ -286,11 +321,13 @@ namespace SupportTicketSystem.Desktop.Forms
             ClientSize = new System.Drawing.Size(1000, 600);
             Controls.Add(panelCommentSection);
             Controls.Add(panelTicketDetails);
+            Controls.Add(panelTopBar);
             Name = "TicketDetailsForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Ticket Details";
             Load += TicketDetailsForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewComments).EndInit();
+            panelTopBar.ResumeLayout(false);
             panelTicketDetails.ResumeLayout(false);
             panelTicketDetails.PerformLayout();
             panelCommentSection.ResumeLayout(false);

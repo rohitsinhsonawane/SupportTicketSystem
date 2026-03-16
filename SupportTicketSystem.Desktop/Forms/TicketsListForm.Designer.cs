@@ -9,6 +9,7 @@ namespace SupportTicketSystem.Desktop.Forms
 
         private System.Windows.Forms.Button btnCreateTicket;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.DataGridView dataGridViewTickets;
         private System.Windows.Forms.Panel panelTopSection;
 
@@ -33,71 +34,91 @@ namespace SupportTicketSystem.Desktop.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            btnCreateTicket = new System.Windows.Forms.Button();
-            btnRefresh = new System.Windows.Forms.Button();
-            dataGridViewTickets = new System.Windows.Forms.DataGridView();
-            panelTopSection = new System.Windows.Forms.Panel();
+            btnCreateTicket = new Button();
+            btnRefresh = new Button();
+            btnLogout = new Button();
+            dataGridViewTickets = new DataGridView();
+            panelTopSection = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridViewTickets).BeginInit();
             panelTopSection.SuspendLayout();
             SuspendLayout();
-
-            // panelTopSection
-            panelTopSection.BackColor = System.Drawing.Color.LightGray;
-            panelTopSection.Controls.Add(btnRefresh);
-            panelTopSection.Controls.Add(btnCreateTicket);
-            panelTopSection.Dock = System.Windows.Forms.DockStyle.Top;
-            panelTopSection.Location = new System.Drawing.Point(0, 0);
-            panelTopSection.Name = "panelTopSection";
-            panelTopSection.Padding = new System.Windows.Forms.Padding(10);
-            panelTopSection.Size = new System.Drawing.Size(1000, 60);
-            panelTopSection.TabIndex = 0;
-
+            // 
             // btnCreateTicket
-            btnCreateTicket.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btnCreateTicket.Location = new System.Drawing.Point(10, 10);
+            // 
+            btnCreateTicket.BackColor = Color.Green;
+            btnCreateTicket.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnCreateTicket.ForeColor = Color.White;
+            btnCreateTicket.Location = new Point(10, 10);
             btnCreateTicket.Name = "btnCreateTicket";
-            btnCreateTicket.Size = new System.Drawing.Size(120, 40);
+            btnCreateTicket.Size = new Size(120, 40);
             btnCreateTicket.TabIndex = 0;
             btnCreateTicket.Text = "Create Ticket";
-            btnCreateTicket.UseVisualStyleBackColor = true;
+            btnCreateTicket.UseVisualStyleBackColor = false;
             btnCreateTicket.Click += BtnCreateTicket_Click;
-
+            // 
             // btnRefresh
-            btnRefresh.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btnRefresh.Location = new System.Drawing.Point(140, 10);
+            // 
+            btnRefresh.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnRefresh.Location = new Point(140, 10);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new System.Drawing.Size(100, 40);
+            btnRefresh.Size = new Size(100, 40);
             btnRefresh.TabIndex = 1;
             btnRefresh.Text = "Refresh";
             btnRefresh.UseVisualStyleBackColor = true;
             btnRefresh.Click += BtnRefresh_Click;
-
+            // 
+            // btnLogout
+            // 
+            btnLogout.Font = new Font("Arial", 10F, FontStyle.Bold);
+            btnLogout.Location = new Point(860, 10);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(120, 40);
+            btnLogout.TabIndex = 2;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += BtnLogout_Click;
+            // 
             // dataGridViewTickets
+            // 
             dataGridViewTickets.AllowUserToAddRows = false;
             dataGridViewTickets.AllowUserToDeleteRows = false;
-            dataGridViewTickets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewTickets.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewTickets.ColumnHeadersHeight = 29;
-            dataGridViewTickets.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridViewTickets.Location = new System.Drawing.Point(0, 60);
+            dataGridViewTickets.Dock = DockStyle.Fill;
+            dataGridViewTickets.Location = new Point(0, 60);
             dataGridViewTickets.MultiSelect = false;
             dataGridViewTickets.Name = "dataGridViewTickets";
             dataGridViewTickets.ReadOnly = true;
             dataGridViewTickets.RowHeadersVisible = false;
             dataGridViewTickets.RowHeadersWidth = 51;
-            dataGridViewTickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewTickets.Size = new System.Drawing.Size(1000, 540);
+            dataGridViewTickets.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewTickets.Size = new Size(1000, 540);
             dataGridViewTickets.TabIndex = 0;
             dataGridViewTickets.DoubleClick += DataGridViewTickets_DoubleClick;
-
+            // 
+            // panelTopSection
+            // 
+            panelTopSection.BackColor = Color.LightGray;
+            panelTopSection.Controls.Add(btnLogout);
+            panelTopSection.Controls.Add(btnRefresh);
+            panelTopSection.Controls.Add(btnCreateTicket);
+            panelTopSection.Dock = DockStyle.Top;
+            panelTopSection.Location = new Point(0, 0);
+            panelTopSection.Name = "panelTopSection";
+            panelTopSection.Padding = new Padding(10);
+            panelTopSection.Size = new Size(1000, 60);
+            panelTopSection.TabIndex = 0;
+            // 
             // TicketsListForm
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.White;
-            ClientSize = new System.Drawing.Size(1000, 600);
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(1000, 600);
             Controls.Add(dataGridViewTickets);
             Controls.Add(panelTopSection);
             Name = "TicketsListForm";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Support Tickets";
             Load += TicketsListForm_LoadAsync;
             ((System.ComponentModel.ISupportInitialize)dataGridViewTickets).EndInit();
